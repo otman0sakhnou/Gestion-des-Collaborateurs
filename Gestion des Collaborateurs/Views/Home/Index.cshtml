@@ -1,0 +1,118 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+<!Doctype html>
+<html>
+    <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Gestion des Collaborateurs</title>
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+   <div class="grid-container">
+
+        <main class="main-container">
+            <div class="main-title">
+                <p class="font-weight-bold">Actualités</p>
+            </div>
+
+            <div class="main-cards">
+
+                <div class="card">
+                    <div class="card-inner">
+                        <p>COLLABORATEURS</p>
+                        <span class="material-icons-outlined text-blue">badge</span>
+                    </div>
+                    <span class="textpr font-weight-bold">249</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <p class="textpr">Formation</p>
+                        <span class="material-icons-outlined text-orange">event_note</span>
+                    </div>
+                    <span class="textpr"></span>
+                    <span class="textpr font-weight-bold">83</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <p class="textpr">Certification</p>
+                        <span class="material-icons-outlined text-green">verified_user</span>           
+                    </div>
+                    <span class="textpr font-weight-bold">79</span>
+                </div>
+
+                <div class="card">
+                    <div class="card-inner">
+                        <p class="textpr">PERIODE D'ESSEAI</p>
+                        <span class="material-icons-outlined text-red">notification_important</span>
+                    </div>
+                    <span class="textpr font-weight-bold">56</span>
+                </div>
+
+            </div>
+
+            <div class="container-info">
+                <div class="salaire">
+                    <div class="card-inner">
+                        <p class="textpr">Moyenne des salaires</p>
+                        <span class="material-icons-outlined savings">savings</span>
+                    </div>
+                    <span class="textpr font-weight-bold">*</span>
+                </div>
+                <div class="age">
+                   <div class="card-inner">
+                        <p class="textpr">Moyenne d'age</p>
+                        <span class="material-icons-outlined people">people</span>
+                   </div>
+                    <span class="textpr font-weight-bold">*</span>
+                </div>
+            </div> 
+            <div class="periode-essai">
+                <h4>periode d'essai dont 2 Semaines</h4>
+                <table class="table table-lg">
+                    <tr class="table-active">
+                        <th>#</th>
+                        <th>Nom</th>
+                        <th>prenom</th>
+                        <th>date debut</th>
+                        <th>date fin</th>
+                        <th>temps restant</th>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>aaa</td>
+                        <td>aaa</td>
+                        <td>05/02/2023</td>
+                        <td>05/07/2023</td>
+                        <td>10jrs</td>
+                    </tr>
+                    <tr>
+                        <td>1</td>
+                        <td>aaa</td>
+                        <td>aaa</td>
+                        <td>05/02/2023</td>
+                        <td>05/07/2023</td>
+                        <td>10jrs</td>
+                    </tr>
+                    
+
+
+                </table>
+            </div>
+            
+               
+            
+
+
+        </main>
+   </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+</body>
+</html>

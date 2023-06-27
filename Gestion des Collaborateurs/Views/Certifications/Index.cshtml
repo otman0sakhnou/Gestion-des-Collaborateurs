@@ -1,0 +1,47 @@
+﻿@model IEnumerable<Gestion_des_Collaborateurs.Models.Certification>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.NomCertification)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Durée)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Coût)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.NomCertification)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Durée)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Coût)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.IdCertification">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.IdCertification">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.IdCertification">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

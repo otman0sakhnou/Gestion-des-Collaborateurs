@@ -1,0 +1,48 @@
+﻿@model Gestion_des_Collaborateurs.Models.Certification
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>Create</h1>
+
+<h4>Certification</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Create">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="IdCertification" class="control-label"></label>
+                <input asp-for="IdCertification" class="form-control" />
+                <span asp-validation-for="IdCertification" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="NomCertification" class="control-label"></label>
+                <input asp-for="NomCertification" class="form-control" />
+                <span asp-validation-for="NomCertification" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Durée" class="control-label"></label>
+                <input asp-for="Durée" class="form-control" />
+                <span asp-validation-for="Durée" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Coût" class="control-label"></label>
+                <input asp-for="Coût" class="form-control" />
+                <span asp-validation-for="Coût" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Create" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
