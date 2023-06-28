@@ -12,7 +12,7 @@ public partial class GestionCollaborateursContext : DbContext
     }
 
     public GestionCollaborateursContext(DbContextOptions<GestionCollaborateursContext> options)
-        : base(options)
+        : base(options) 
     {
     }
 
