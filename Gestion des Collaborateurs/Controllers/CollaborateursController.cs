@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using Gestion_des_Collaborateurs.Data;
 using Gestion_des_Collaborateurs.Models;
+using Microsoft.AspNetCore.Mvc.Razor.Compilation;
 
 namespace Gestion_des_Collaborateurs.Controllers
 {
@@ -18,11 +19,14 @@ namespace Gestion_des_Collaborateurs.Controllers
         {
             _context = context;
         }
+        //Get :le nombre des collaborateurs
+        int nombreColl;
+       
 
         // GET: Collaborateurs
         public async Task<IActionResult> Index()
         {
-              return _context.Collaborateurs != null ? 
+            return _context.Collaborateurs != null ? 
                           View(await _context.Collaborateurs.ToListAsync()) :
                           Problem("Entity set 'GestionCollaborateursContext.Collaborateurs'  is null.");
         }
@@ -56,7 +60,7 @@ namespace Gestion_des_Collaborateurs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCollaborateur,Nom,Prenom,DateEmbauche,Anciennete,DateDebutEssai,DateFinEssai")] Collaborateur collaborateur)
+        public async Task<IActionResult> Create([Bind("IdCollaborateur,Nom,Prenom,DateEmbauche,Anciennete,DateDebutEssai,DateFinEssai,DateNaissance,salaire")] Collaborateur collaborateur)
         {
             if (ModelState.IsValid)
             {
@@ -88,7 +92,7 @@ namespace Gestion_des_Collaborateurs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCollaborateur,Nom,Prenom,DateEmbauche,Anciennete,DateDebutEssai,DateFinEssai")] Collaborateur collaborateur)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCollaborateur,Nom,Prenom,DateEmbauche,Anciennete,DateDebutEssai,DateFinEssai,DateNaissance,salaire")] Collaborateur collaborateur)
         {
             if (id != collaborateur.IdCollaborateur)
             {

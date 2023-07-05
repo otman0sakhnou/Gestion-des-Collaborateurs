@@ -1,12 +1,14 @@
-﻿@{
+﻿
+@{
     ViewData["Title"] = "Home Page";
 }
+
 <!Doctype html>
 <html>
     <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - Gestion des Collaborateurs</title>
+    <title>@ViewData["Title"]- Gestion des Collaborateurs</title>
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
@@ -25,7 +27,7 @@
                         <p>COLLABORATEURS</p>
                         <span class="material-icons-outlined text-blue">badge</span>
                     </div>
-                    <span class="textpr font-weight-bold">249</span>
+                    <span class="textpr font-weight-bold">@ViewBag.nombreColl</span>
                 </div>
 
                 <div class="card">
@@ -34,7 +36,7 @@
                         <span class="material-icons-outlined text-orange">event_note</span>
                     </div>
                     <span class="textpr"></span>
-                    <span class="textpr font-weight-bold">83</span>
+                    <span class="textpr font-weight-bold">@ViewBag.nombreFormation</span>
                 </div>
 
                 <div class="card">
@@ -42,7 +44,7 @@
                         <p class="textpr">Certification</p>
                         <span class="material-icons-outlined text-green">verified_user</span>           
                     </div>
-                    <span class="textpr font-weight-bold">79</span>
+                    <span class="textpr font-weight-bold">@ViewBag.nombreCertif</span>
                 </div>
 
                 <div class="card">

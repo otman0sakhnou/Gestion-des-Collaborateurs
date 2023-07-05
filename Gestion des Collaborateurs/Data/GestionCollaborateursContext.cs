@@ -109,6 +109,12 @@ public partial class GestionCollaborateursContext : DbContext
                 .HasMaxLength(40)
                 .IsUnicode(false)
                 .HasColumnName("prenom");
+            entity.Property(e => e.salaire)
+                .HasColumnType("decimal(18, 0)")
+                .HasColumnName("salaire");
+            entity.Property(e => e.DateNaissance)
+                .HasColumnType("date")
+                .HasColumnName("date_naissance");
         });
 
         modelBuilder.Entity<Formation>(entity =>

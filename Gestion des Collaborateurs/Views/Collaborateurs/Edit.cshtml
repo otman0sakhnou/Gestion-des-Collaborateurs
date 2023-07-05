@@ -44,6 +44,16 @@
                 <span asp-validation-for="DateFinEssai" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="DateNaissance" class="control-label"></label>
+                <input asp-for="DateNaissance" class="form-control" />
+                <span asp-validation-for="DateNaissance" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="salaire" class="control-label"></label>
+                <input asp-for="salaire" class="form-control" />
+                <span asp-validation-for="salaire" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Save" class="btn btn-primary" />
             </div>
         </form>

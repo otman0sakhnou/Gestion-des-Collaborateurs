@@ -4,62 +4,98 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Nom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Prenom)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateEmbauche)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Anciennete)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateDebutEssai)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateFinEssai)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Nom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Prenom)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateEmbauche)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Anciennete)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateDebutEssai)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateFinEssai)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdCollaborateur">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdCollaborateur">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdCollaborateur">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<!DOCTYPE html>
+<html>
+    <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nouveau Collaborateur</title>
+    <link href="~/template/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+    <body>
+        <div class="grid-container">
+            <main class="main-container">        
+                <h1>Index</h1>
+
+        <p>
+            <a asp-action="Create">Create New</a>
+        </p>
+        <table class="table">
+            <thead>
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Nom)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Prenom)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateEmbauche)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Anciennete)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateDebutEssai)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.DateFinEssai)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model=>model.salaire)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model=>model.DateNaissance)
+                    </th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Nom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Prenom)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateEmbauche)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Anciennete)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateDebutEssai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.DateFinEssai)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem=>item.salaire)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem=>item.DateNaissance)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.IdCollaborateur">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.IdCollaborateur">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.IdCollaborateur">Delete</a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+        </main>
+
+        </div>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+
+    </body>
+</html>
