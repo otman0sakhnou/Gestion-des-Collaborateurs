@@ -75,7 +75,7 @@ body {
     grid-area: sidebar;
     height: 100%;
     background-color: #21232d;
-    
+    width:fit-content;
     color: #9799ab;
     overflow-y: auto;
     transition: all 0.5s;
