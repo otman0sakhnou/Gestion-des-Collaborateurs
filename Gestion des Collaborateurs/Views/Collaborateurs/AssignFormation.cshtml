@@ -1,0 +1,23 @@
+﻿@model int
+
+@{
+    ViewData["Title"] = "Assign Formation";
+}
+
+<h1>Assign Formation</h1>
+
+<form asp-controller="Collaborateurs" asp-action="AssignFormation" method="post">
+    <input type="hidden" name="id" value="@Model" />
+
+    <div class="form-group">
+        <label for="formationId">Select Formation:</label>
+        <select name="formationId" id="formationId" class="form-control">
+            @foreach (var formation in ViewBag.Formations)
+            {
+                <option value="@formation.Id">@formation.Name</option>
+            }
+        </select>
+    </div>
+
+    <button type="submit" class="btn btn-primary">Assign</button>
+</form>

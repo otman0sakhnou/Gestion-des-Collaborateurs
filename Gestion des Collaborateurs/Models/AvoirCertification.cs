@@ -5,7 +5,7 @@ namespace Gestion_des_Collaborateurs.Models;
 
 public partial class AvoirCertification
 {
-    public int IdCollaborateur { get; set; }
+    public int? IdCollaborateur { get; set; }
 
     public int IdCertification { get; set; }
 

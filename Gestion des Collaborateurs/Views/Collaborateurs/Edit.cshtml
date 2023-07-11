@@ -4,7 +4,7 @@
     ViewData["Title"] = "Edit";
 }
 
-<h1>Edit</h1>
+<h1 style="color:black;">Modiier</h1>
 
 <h4>Collaborateur</h4>
 <hr />
@@ -14,56 +14,103 @@
             <div asp-validation-summary="ModelOnly" class="text-danger"></div>
             <input type="hidden" asp-for="IdCollaborateur" />
             <div class="form-group">
-                <label asp-for="Nom" class="control-label"></label>
-                <input asp-for="Nom" class="form-control" />
-                <span asp-validation-for="Nom" class="text-danger"></span>
+                <table>
+                    <tr>
+                        <td><label asp-for="Nom" class="control-label">Nom</label></td>
+                        <td><label asp-for="Prenom" class="control-label">Prénom</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input asp-for="Nom" class="form-control" />
+                            <span asp-validation-for="Nom" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="Prenom" class="form-control" />
+                            <span asp-validation-for="Prenom" class="text-danger"></span>
+                        </td>
+                    </tr>
+                </table>
             </div>
+
             <div class="form-group">
-                <label asp-for="Prenom" class="control-label"></label>
-                <input asp-for="Prenom" class="form-control" />
-                <span asp-validation-for="Prenom" class="text-danger"></span>
+                <table>
+                    <tr>
+                        <td><label asp-for="DateEmbauche" class="control-label">Date d'embauche</label></td>
+
+                        <td><label asp-for="Anciennete" class="control-label">Ancienneté</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="date" asp-for="DateEmbauche" class="form-control" />
+                            <span asp-validation-for="DateEmbauche" class="text-danger"></span>
+                        </td>
+
+                        <td>
+                            <input asp-for="Anciennete" class="form-control" />
+                            <span asp-validation-for="Anciennete" class="text-danger"></span>
+                        </td>
+                    </tr>
+                </table>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="DateEmbauche" class="control-label"></label>
-                <input asp-for="DateEmbauche" class="form-control" />
-                <span asp-validation-for="DateEmbauche" class="text-danger"></span>
+                <table>
+                    <tr>
+                        <td><label asp-for="DateDebutEssai" class="control-label">Date de début d'essai</label></td>
+
+                        <td><label asp-for="DateFinEssai" class="control-label">Date de fin d'essai</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="date" asp-for="DateDebutEssai" class="form-control" />
+                            <span asp-validation-for="DateDebutEssai" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input type="date" asp-for="DateFinEssai" class="form-control" />
+                            <span asp-validation-for="DateFinEssai" class="text-danger"></span>
+                        </td>
+                    </tr>
+                </table>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="Anciennete" class="control-label"></label>
-                <input asp-for="Anciennete" class="form-control" />
-                <span asp-validation-for="Anciennete" class="text-danger"></span>
+                <table>
+                    <tr>
+                        <td><label asp-for="DateNaissance" class="control-label">Date de naissance</label></td>
+                        <td><label asp-for="salaire" class="control-label">Salaire</label></td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <input type="date" asp-for="DateNaissance" class="form-control" />
+                            <span asp-validation-for="DateNaissance" class="text-danger"></span>
+                        </td>
+                        <td>
+                            <input asp-for="salaire" class="form-control" />
+                            <span asp-validation-for="salaire" class="text-danger"></span>
+                        </td>
+                    </tr>
+                </table>
             </div>
+            <br />
             <div class="form-group">
-                <label asp-for="DateDebutEssai" class="control-label"></label>
-                <input asp-for="DateDebutEssai" class="form-control" />
-                <span asp-validation-for="DateDebutEssai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateFinEssai" class="control-label"></label>
-                <input asp-for="DateFinEssai" class="form-control" />
-                <span asp-validation-for="DateFinEssai" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="DateNaissance" class="control-label"></label>
-                <input asp-for="DateNaissance" class="form-control" />
-                <span asp-validation-for="DateNaissance" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <label asp-for="salaire" class="control-label"></label>
-                <input asp-for="salaire" class="form-control" />
-                <span asp-validation-for="salaire" class="text-danger"></span>
-            </div>
-            <div class="form-group">
-                <input type="submit" value="Save" class="btn btn-primary" />
+                <input type="submit" value="Garder" class="btn btn-success" />
             </div>
         </form>
     </div>
 </div>
-
+<br />
 <div>
-    <a asp-action="Index">Back to List</a>
+    <a asp-controller="Home" asp-action="Index">
+        <i class="bi bi-box-arrow-left"></i>
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
+            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
+        </svg>Revenir à l'aceuil
+    </a>
 </div>
 
 @section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
 }

@@ -26,6 +26,11 @@
                 <span asp-validation-for="IdFormateur" class="text-danger"></span>
             </div>
             <div class="form-group">
+                <label asp-for="NomFormateur" control-label"></label>
+                <input asp-for="NomFormateur" class="form-control" />
+                <span asp-validation-for="NomFormateur" class="text-danger"></span>
+            </div>
+            <div class="form-group">
                 <input type="submit" value="Create" class="btn btn-primary" />
             </div>
         </form>

@@ -307,3 +307,25 @@ body {
         display: none;
     }
 }
+
+.style-back-liste {
+    color: #485790;
+    text-decoration-line: none;
+}
+
+    .style-back-liste:hover {
+        color: #485770;
+    }
+
+.form-group {
+    width: 350px;
+}
+
+label {
+    color: #485783;
+}
+
+.styled {
+    text-decoration-line: none;
+      color:  grey;
+}

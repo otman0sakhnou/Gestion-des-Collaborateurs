@@ -23,12 +23,19 @@
         <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.IdFormationNavigation.IdFormation)
         </dd>
+        <dt class="col-sm-2">
+            @Html.DisplayNameFor(model=>model.NomFormateur)
+        </dt>
+        <dd class="col-sm-10">
+            @Html.DisplayFor(model=>model.NomFormateur)
+        </dd>
     </dl>
     
     <form asp-action="Delete">
         <input type="hidden" asp-for="IdCollaborateur" />
         <input type="hidden" asp-for="IdFormation" />
         <input type="hidden" asp-for="IdFormateur" />
+        <input type="hidden" asp-for="NomFormateur" />
         <input type="submit" value="Delete" class="btn btn-danger" /> |
         <a asp-action="Index">Back to List</a>
     </form>

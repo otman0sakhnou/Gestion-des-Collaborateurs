@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Gestion_des_Collaborateurs.Models.Collaborateur>
+﻿@*@model IEnumerable<Gestion_des_Collaborateurs.Models.Collaborateur>
 
 @{
     ViewData["Title"] = "Index";
@@ -22,6 +22,8 @@
         <p>
             <a asp-action="Create">Create New</a>
         </p>
+            <form id="assignFormationsCertificatesForm" method="post" action="/Collaborateurs/AssignFormationsCertificates">
+
         <table class="table">
             <thead>
                 <tr>
@@ -31,6 +33,9 @@
                     <th>
                         @Html.DisplayNameFor(model => model.Prenom)
                     </th>
+                        <th>
+                            @Html.DisplayNameFor(model=>model.DateNaissance)
+                        </th>
                     <th>
                         @Html.DisplayNameFor(model => model.DateEmbauche)
                     </th>
@@ -46,10 +51,7 @@
                     <th>
                         @Html.DisplayNameFor(model=>model.salaire)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model=>model.DateNaissance)
-                    </th>
-                    <th></th>
+                   <th></th>
                 </tr>
             </thead>
             <tbody>
@@ -62,6 +64,9 @@
                         <td>
                             @Html.DisplayFor(modelItem => item.Prenom)
                         </td>
+                            <td>
+                                @Html.DisplayFor(modelItem=>item.DateNaissance)
+                            </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.DateEmbauche)
                         </td>
@@ -77,9 +82,7 @@
                         <td>
                             @Html.DisplayFor(modelItem=>item.salaire)
                         </td>
-                        <td>
-                            @Html.DisplayFor(modelItem=>item.DateNaissance)
-                        </td>
+                       
                         <td>
                             <a asp-action="Edit" asp-route-id="@item.IdCollaborateur">Edit</a> |
                             <a asp-action="Details" asp-route-id="@item.IdCollaborateur">Details</a> |
@@ -89,6 +92,11 @@
                 }
             </tbody>
         </table>
+            <button type="submit" class="btn btn-primary" name="assignFormations">Affecter Formation</button>
+
+            <!-- Button to assign certificates -->
+            <button type="submit" class="btn btn-primary" name="assignCertificates">Affecter Certificat</button>
+            </form>
         </main>
 
         </div>
@@ -99,3 +107,331 @@
 
     </body>
 </html>
+*@
+
+
+@model IEnumerable<Gestion_des_Collaborateurs.Models.Collaborateur>
+@{
+    ViewData["Title"] = "Index";
+}
+@*
+@if (TempData["SuccessMessage"] != null)
+{
+    <div class="toast align-items-center text-center toast-success" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000" data-autohide="true">
+
+        <div class="toast-body">
+            @TempData["SuccessMessage"]
+        </div>
+    </div>
+}
+@if (TempData["ErrorMessage"] != null)
+{
+    <div class="toast align-items-center text-center toast-error" role="alert" aria-live="assertive" aria-atomic="true" data-autohide="true" data-delay="2000">
+        <div class="toast-body">
+            @TempData["ErrorMessage"]
+        </div>
+    </div>
+}*@
+<link href="~/template/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+
+<body>
+    <div class="d-sm-flex align-items justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Collaborateurs</h1>
+    </div>
+    <div class="card">
+        <br />
+        <div class="d-grid gap-2 d-inline-flex p-2 justify-content-md-end">
+            <div class="col-7 text-end">
+                <a asp-controller="Collaborateurs" asp-action="Create" class="btn btn-primary custom-margin">
+                    <i class="bi bi-plus-circle"></i>&nbsp;Ajouter Collaborateur
+                </a>
+            </div>
+        </div>
+
+
+
+
+
+        @*<form id="assignFormationForm" method="post" action="/Collaborateurs/AssignFormation">*@
+
+        <div class="card-body">
+            <form id="assignFormationsCertificatesForm" method="post" action="/Collaborateurs/AssignFormationsCertificates">
+
+
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th></th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.IdCollaborateur)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Nom)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.Prenom)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateNaissance)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateDebutEssai)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateFinEssai)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateEmbauche)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model=>model.salaire)
+                            </th>
+                            <th>Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    <input type="checkbox" name="selectedCollaborateurs" value="@item.IdCollaborateur" />
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdCollaborateur)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Nom)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.Prenom)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateNaissance)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateDebutEssai)
+                                </td>
+                                <td >
+                                    @Html.DisplayFor(modelItem => item.DateFinEssai) 
+                                   
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateEmbauche)
+                                </td>
+                                <td>@Html.DisplayFor(modelItem => item.salaire)</td>
+                           
+                                <td>
+
+                                    <a style="margin-right:10px;" asp-controller="Collaborateurs" asp-action="Edit" asp-route-id="@item.IdCollaborateur"> <span class="material-icons-outlined text-primary">edit </span></a>
+                                    <a style="margin-right:10px;" asp-controller="Collaborateurs" asp-action="Details" asp-route-id="@item.IdCollaborateur" ><span class="material-icons-outlined text-success">search </span></a>
+                                        <a asp-controller="Collaborateurs" asp-action="Delete" asp-route-id="@item.IdCollaborateur" ><span class="material-icons-outlined text-danger">delete </span></a>
+                                    
+                                    
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+                <!-- Button to assign a formation -->
+                @*<button type="submit" class="btn btn-primary">Assign Formation</button>*@
+                <button type="submit" class="btn btn-primary" name="assignFormations">Affecter Formation</button>
+
+                <!-- Button to assign certificates -->
+                <button type="submit" class="btn btn-primary" name="assignCertificates">Affecter Certificat</button>
+            </form>
+
+        </div>
+    </div>
+    <!-- Modal for formation selection -->
+
+
+    <div class="modal" id="formationModal" tabindex="-1" aria-labelledby="formationModalLabel" aria-hidden="true">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="formationModalLabel">Select a Formation</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="formationDropdown">Formation:</label>
+                        <select id="formationDropdown" name="formationName" class="form-control">
+                            <option value="">Select a formation</option>
+                            <!-- Populate options dynamically using JavaScript -->
+                        </select>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="assignBtn">Assign</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+
+
+    <div class="modal" id="certificateModal" tabindex="-1" aria-labelledby="certificateModalLabel" aria-hidden="true" style="display:none;">
+        <div class="modal-backdrop"></div>
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="certificateModalLabel">Select a Certificate</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="form-group">
+                        <label for="certificateDropdown">Certificate:</label>
+                        <select id="certificateDropdown" name="certificateName" class="form-control">
+                            <option value="">Select a certificate</option>
+                            <!-- Populate options dynamically using JavaScript -->
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label for="certificateDateObtention">Date of Obtaining:</label>
+                        <input type="date" class="form-control" id="certificateDateObtention">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" id="assignCertificateBtn">Assign</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- JavaScript -->
+
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+
+
+    <script>
+
+        $(document).ready(function () {
+            // Prevent the default form submission
+            $("#assignFormationsCertificatesForm").submit(function (e) {
+                e.preventDefault();
+
+                // Get the selected collaborateurs
+                var selectedCollaborateurs = [];
+                $("input[name='selectedCollaborateurs']:checked").each(function () {
+                    selectedCollaborateurs.push($(this).val());
+                });
+
+                if (selectedCollaborateurs.length > 0) {
+                    // Check which button was clicked
+                    if ($("button[name='assignFormations']").is(":focus")) {
+                        // Fetch formation names from the server
+                        $.get("/Collaborateurs/GetFormationNames", function (data) {
+                            // Create the dropdown options
+                            var options = '';
+                            $.each(data, function (index, formationName) {
+                                options += '<option value="' + formationName + '">' + formationName + '</option>';
+                            });
+
+                            // Populate the dropdown list in the formation modal
+                            $('#formationDropdown').html(options);
+
+                            // Show the formation modal
+                            $('#formationModal').modal('show');
+
+                            // Handle assign button click in the formation modal
+                            $("#assignBtn").click(function () {
+                                var formationName = $('#formationDropdown').val();
+                                if (formationName !== "") {
+                                    // Add a hidden input field to store the selected formation
+                                    var hiddenInput = $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', 'formationName')
+                                        .val(formationName);
+                                    $('#assignFormationsCertificatesForm').append(hiddenInput);
+
+                                    // Submit the form
+                                    $('#assignFormationsCertificatesForm').unbind('submit').submit();
+                                } else {
+                                    alert('Please select a formation.');
+                                }
+                            });
+                        });
+                    } else if ($("button[name='assignCertificates']").is(":focus")) {
+                        // Fetch certificate names from the server
+                        $.get("/Collaborateurs/GetCertificateNames", function (data) {
+                            // Create the dropdown options
+                            var options = '';
+                            $.each(data, function (index, certificateName) {
+                                options += '<option value="' + certificateName + '">' + certificateName + '</option>';
+                            });
+
+                            // Populate the dropdown list in the certificate modal
+                            $('#certificateDropdown').html(options);
+
+                            // Show the certificate modal
+                            $('#certificateModal').modal('show');
+
+                            // Handle assign button click in the certificate modal
+                            $("#assignCertificateBtn").click(function () {
+                                var certificateName = $('#certificateDropdown').val();
+                                var dateObtention = $('#certificateDateObtention').val();
+                                if (certificateName !== "") {
+                                    // Add a hidden input field to store the selected certificate
+                                    var hiddenInput = $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', 'certificateName')
+                                        .val(certificateName);
+                                    var dateInput = $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', 'certificateDateObtention')
+                                        .val(dateObtention);
+                                    $('#assignFormationsCertificatesForm').append(hiddenInput);
+                                    $('#assignFormationsCertificatesForm').append(dateInput);
+                                    // Submit the form
+                                    $('#assignFormationsCertificatesForm').unbind('submit').submit();
+                                } else {
+                                    alert('Please select a certificate.');
+                                }
+                            });
+                        });
+                    }
+                } else {
+                    alert("Please select at least one collaborateur.");
+                }
+            });
+        });
+    </script>
+    <script>
+        $(document).ready(function () {
+            // Check if the success message exists in TempData
+            var successMessage = "@TempData["SuccessMessage"]";
+            if (successMessage) {
+                // Show the toast message
+                showToast(successMessage);
+            }
+        });
+        $(document).ready(function () {
+            // Check if the success message exists in TempData
+            var ErrorMessage = "@TempData["ErrorMessage"]";
+            if (ErrorMessage) {
+                // Show the toast message
+                showToast(ErrorMessage);
+            }
+        });
+
+
+        function showToast(message) {
+            var toastElement = $('.toast');
+            var toastBody = $('.toast-body');
+            toastBody.text(message);
+            toastElement.toast('show');
+        }
+
+    </script>
+
+</body> 

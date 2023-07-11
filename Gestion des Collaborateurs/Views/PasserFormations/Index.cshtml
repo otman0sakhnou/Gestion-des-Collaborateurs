@@ -4,38 +4,300 @@
     ViewData["Title"] = "Index";
 }
 
-<h1>Index</h1>
+@*<body>
+<div class="d-sm-flex align-items justify-content-between mb-4">
+    <h1 class="h3 mb-0 text-gray-800">Les Formations</h1>
+</div>
+<div class="card">
+    <br />
+    <div class="d-grid gap-2 d-inline-flex p-2 justify-content-md-end">
+        <div class="col-7 text-end">
+            <a asp-controller="Collaborateurs" asp-action="Create" class="btn btn-primary custom-margin">
+                <i class="bi bi-plus-circle"></i>&nbsp;Ajouter une formation
+            </a>
+        </div>
+    </div>  
+    <div class="card-body">
+        <table id="example" class="table table-striped" style="width:100%">
+            <thead>
+                <tr>
+                <th>
+                        @Html.DisplayNameFor(model=>model.IdCollaborateur)
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.IdCollaborateurNavigation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.IdFormationNavigation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdCollaborateurNavigation.IdCollaborateur)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IdFormationNavigation.IdFormation)
-            </td>
-            <td>
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+                </th>
+                <th>@Html.DisplayNameFor(model=>model.IdFormation)</th>
+                <th>
+                    @Html.DisplayNameFor(model=>model.IdFormationNavigation.NomFormation)
+                </th>
+                <th>@Html.DisplayNameFor(model=>model.IdFormateur)</th>
+                <th>@Html.DisplayNameFor(model=>model.NomFormateur)</th>
+                <th>Nom de collaborateur</th>
+
+                <th>@Html.DisplayNameFor(model=>model.IdFormationNavigation.DateDebutFormation)</th>
+                <th>@Html.DisplayNameFor(model=>model.IdFormationNavigation.DateFinFormation)</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdCollaborateurNavigation.IdCollaborateur)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdFormationNavigation.IdFormation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdFormationNavigation.NomFormation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdFormateur)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.NomFormateur)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => (item.IdCollaborateurNavigation.Nom)) @Html.DisplayFor(modelItem=>item.IdCollaborateurNavigation.Prenom)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdFormationNavigation.DateDebutFormation)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.IdFormationNavigation.DateFinFormation)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                        @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+</div>
+</div>
+</body>*@
+
+
+<link href="~/template/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+
+
+
+<body>
+     <div class="d-sm-flex align-items justify-content-between mb-4">
+        <h1 class="h3 mb-0 text-gray-800">Collaborateurs</h1>
+    </div>
+    <div class="card">
+        <br />
+        <div class="d-grid gap-2 d-inline-flex p-2 justify-content-md-end">
+            <div class="col-7 text-end">
+                <a asp-controller="Collaborateurs" asp-action="Create" class="btn btn-primary custom-margin">
+                    <i class="bi bi-plus-circle"></i>&nbsp;Ajouter une affectation
+                </a>
+            </div>
+        </div>
+
+
+
+
+
+        @*<form id="assignFormationForm" method="post" action="/Collaborateurs/AssignFormation">*@
+
+        <div class="card-body">
+
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model=>model.IdCollaborateur)
+
+                            </th>
+                            <th>@Html.DisplayNameFor(model=>model.IdFormation)</th>
+                            <th>
+                                @Html.DisplayNameFor(model=>model.IdFormationNavigation.NomFormation)
+                            </th>
+                            <th>@Html.DisplayNameFor(model=>model.IdFormateur)</th>
+                            <th>@Html.DisplayNameFor(model=>model.NomFormateur)</th>
+                            <th>Nom de collaborateur</th>
+
+                            <th>@Html.DisplayNameFor(model=>model.IdFormationNavigation.DateDebutFormation)</th>
+                            <th>@Html.DisplayNameFor(model=>model.IdFormationNavigation.DateFinFormation)</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdCollaborateurNavigation.IdCollaborateur)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdFormationNavigation.IdFormation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdFormationNavigation.NomFormation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdFormateur)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NomFormateur)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => (item.IdCollaborateurNavigation.Nom)) @Html.DisplayFor(modelItem=>item.IdCollaborateurNavigation.Prenom)
+                                </td>
+
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdFormationNavigation.DateDebutFormation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.IdFormationNavigation.DateFinFormation)
+                                </td>
+
+                                <td>
+                                    @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
+                                    @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+        </div>
+    </div>
+</body>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+<!-- JavaScript -->
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/js/bootstrap.min.js"></script>
+
+
+
+<script>
+
+    $(document).ready(function () {
+        // Prevent the default form submission
+        $("#assignFormationsCertificatesForm").submit(function (e) {
+            e.preventDefault();
+
+            // Get the selected collaborateurs
+            var selectedCollaborateurs = [];
+            $("input[name='selectedCollaborateurs']:checked").each(function () {
+                selectedCollaborateurs.push($(this).val());
+            });
+
+            if (selectedCollaborateurs.length > 0) {
+                // Check which button was clicked
+                if ($("button[name='assignFormations']").is(":focus")) {
+                    // Fetch formation names from the server
+                    $.get("/Collaborateurs/GetFormationNames", function (data) {
+                        // Create the dropdown options
+                        var options = '';
+                        $.each(data, function (index, formationName) {
+                            options += '<option value="' + formationName + '">' + formationName + '</option>';
+                        });
+
+                        // Populate the dropdown list in the formation modal
+                        $('#formationDropdown').html(options);
+
+                        // Show the formation modal
+                        $('#formationModal').modal('show');
+
+                        // Handle assign button click in the formation modal
+                        $("#assignBtn").click(function () {
+                            var formationName = $('#formationDropdown').val();
+                            if (formationName !== "") {
+                                // Add a hidden input field to store the selected formation
+                                var hiddenInput = $('<input>')
+                                    .attr('type', 'hidden')
+                                    .attr('name', 'formationName')
+                                    .val(formationName);
+                                $('#assignFormationsCertificatesForm').append(hiddenInput);
+
+                                // Submit the form
+                                $('#assignFormationsCertificatesForm').unbind('submit').submit();
+                            } else {
+                                alert('Please select a formation.');
+                            }
+                        });
+                    });
+                } else if ($("button[name='assignCertificates']").is(":focus")) {
+                    // Fetch certificate names from the server
+                    $.get("/Collaborateurs/GetCertificateNames", function (data) {
+                        // Create the dropdown options
+                        var options = '';
+                        $.each(data, function (index, certificateName) {
+                            options += '<option value="' + certificateName + '">' + certificateName + '</option>';
+                        });
+
+                        // Populate the dropdown list in the certificate modal
+                        $('#certificateDropdown').html(options);
+
+                        // Show the certificate modal
+                        $('#certificateModal').modal('show');
+
+                        // Handle assign button click in the certificate modal
+                        $("#assignCertificateBtn").click(function () {
+                            var certificateName = $('#certificateDropdown').val();
+                            var dateObtention = $('#certificateDateObtention').val();
+                            if (certificateName !== "") {
+                                // Add a hidden input field to store the selected certificate
+                                var hiddenInput = $('<input>')
+                                    .attr('type', 'hidden')
+                                    .attr('name', 'certificateName')
+                                    .val(certificateName);
+                                var dateInput = $('<input>')
+                                    .attr('type', 'hidden')
+                                    .attr('name', 'certificateDateObtention')
+                                    .val(dateObtention);
+                                $('#assignFormationsCertificatesForm').append(hiddenInput);
+                                $('#assignFormationsCertificatesForm').append(dateInput);
+                                // Submit the form
+                                $('#assignFormationsCertificatesForm').unbind('submit').submit();
+                            } else {
+                                alert('Please select a certificate.');
+                            }
+                        });
+                    });
+                }
+            } else {
+                alert("Please select at least one collaborateur.");
+            }
+        });
+    });
+</script>
+<script>
+    $(document).ready(function () {
+        // Check if the success message exists in TempData
+        var successMessage = "@TempData["SuccessMessage"]";
+        if (successMessage) {
+            // Show the toast message
+            showToast(successMessage);
+        }
+    });
+    $(document).ready(function () {
+        // Check if the success message exists in TempData
+        var ErrorMessage = "@TempData["ErrorMessage"]";
+        if (ErrorMessage) {
+            // Show the toast message
+            showToast(ErrorMessage);
+        }
+    });
+
+
+    function showToast(message) {
+        var toastElement = $('.toast');
+        var toastBody = $('.toast-body');
+        toastBody.text(message);
+        toastElement.toast('show');
+    }
+
+</script>

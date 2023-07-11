@@ -43,7 +43,7 @@ namespace Gestion_des_Collaborateurs.Controllers
                 return NotFound();
             }
 
-            return View(passerFormation);
+            return View(passerFormation);   
         }
 
         // GET: PasserFormations/Create
@@ -59,7 +59,7 @@ namespace Gestion_des_Collaborateurs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("IdCollaborateur,IdFormation,IdFormateur")] PasserFormation passerFormation)
+        public async Task<IActionResult> Create([Bind("IdCollaborateur,IdFormation,IdFormateur,NomFormateur")] PasserFormation passerFormation)
         {
             if (ModelState.IsValid)
             {
@@ -95,7 +95,7 @@ namespace Gestion_des_Collaborateurs.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("IdCollaborateur,IdFormation,IdFormateur")] PasserFormation passerFormation)
+        public async Task<IActionResult> Edit(int id, [Bind("IdCollaborateur,IdFormation,IdFormateur,NomFormateur")] PasserFormation passerFormation)
         {
             if (id != passerFormation.IdCollaborateur)
             {
@@ -111,7 +111,7 @@ namespace Gestion_des_Collaborateurs.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!PasserFormationExists(passerFormation.IdCollaborateur))
+                    if (!PasserFormationExists((int)passerFormation.IdCollaborateur))
                     {
                         return NotFound();
                     }

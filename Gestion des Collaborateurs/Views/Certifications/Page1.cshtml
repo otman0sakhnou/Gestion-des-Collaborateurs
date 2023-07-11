@@ -1,0 +1,137 @@
+﻿@model List<CertificationViewModel>
+<style>
+    .row .container {
+        max-width: 100% !important;
+        display: inline !important;
+        margin-left: -14px !important;
+        margin-top: 14px !important;
+    }
+
+    #myInput {
+        background-image: url('/images/logos/search.png'); /* Add a search icon to input */
+        background-position: 10px 15px; /* Position the search icon */
+        background-size: 20px 20px;
+        background-repeat: no-repeat; /* Do not repeat the icon image */
+        width: 30%; /* Full-width */
+        font-size: 16px; /* Increase font-size */
+        padding: 12px 20px 12px 40px; /* Add some padding */
+        border: 1px solid #ddd; /* Add a grey border */
+        margin: 12px; /* Add some space below the input */
+        align-content: end;
+    }
+
+
+
+    #myTable {
+        /* Add a bottom border to all table rows */
+        border-bottom: 1px solid #ddd;
+        margin: 12px;
+    }
+
+
+        #myTable tr.header, #myTable tr:hover {
+            /* Add a grey background color to the table header and on hover */
+            background-color: #f1f1f1;
+        }
+
+</style>
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
+
+<body>
+    <h1 class="text-left">Certifications</h1>
+    <hr class="sidebar-divider my-1" />
+
+
+    <br />
+
+    <br />
+
+    <div class="card">
+
+        <div class="container-flex  justify-content-start">
+            <nav class="nav nav-tabs ">
+                <button type="button" class="nav-link" onclick="redirectToAnotherPage()">Certifications</button>
+                <button type="button" class="nav-link  active" data-bs-toggle="tab" data-bs-target="#tab-Affectation">Affectations</button>
+            </nav>
+        </div>
+        <div class="tab-content">
+            <div class="tab-pane active show fade" id="tab-Affectation">
+                <br />
+                <h1 style="margin:12px">Liste des Certificats</h1>
+                <br />
+
+                <input type="text" id="myInput" onkeyup="myFunction()" placeholder="Rechercher un certificat..">
+            </div>
+            <table id="myTable" class="table  table-bordered" style="width:90%">
+                <thead>
+                    <tr>
+                        <th>Certificat</th>
+                        <th>Nom Collaborateur</th>
+                        <th>Prénom Collaborateur</th>
+                        <th>Date de Passage</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var certificat in Model)
+                    {
+                        <tr>
+                            <td>@certificat.NomCertificat</td>
+                            <td>
+                                @for (var i = 0; i < certificat.NomCollaborateurs.Count; i++)
+                                {
+                                    <div>@certificat.NomCollaborateurs[i]</div>
+                                }
+                            </td>
+                            <td>
+                                @for (var i = 0; i < certificat.PrenomCollaborateurs.Count; i++)
+                                {
+                                    <div>@certificat.PrenomCollaborateurs[i]</div>
+                                }
+                            </td>
+                            <td>
+                                @for (var i = 0; i < certificat.DatePassage.Count; i++)
+                                {
+                                    <div>@certificat.DatePassage[i].ToString("dd/MM/yyyy")</div>
+                                }
+                            </td>
+                        </tr>
+                    }
+
+                </tbody>
+            </table>
+
+
+
+
+
+        </div>
+    </div>
+    <script>
+        function redirectToAnotherPage() {
+            var url = '@Url.Action("index", "Certifications")';
+            window.location.href = url;
+        }
+        function myFunction() {
+            // Declare variables
+            var input, filter, table, tr, td, i, txtValue;
+            input = document.getElementById("myInput");
+            filter = input.value.toUpperCase();
+            table = document.getElementById("myTable");
+            tr = table.getElementsByTagName("tr");
+
+            // Loop through all table rows, and hide those who don't match the search query
+            for (i = 0; i < tr.length; i++) {
+                td = tr[i].getElementsByTagName("td")[0];
+                if (td) {
+                    txtValue = td.textContent || td.innerText;
+                    if (txtValue.toUpperCase().indexOf(filter) > -1) {
+                        tr[i].style.display = "";
+                    } else {
+                        tr[i].style.display = "none";
+                    }
+                }
+            }
+        }
+    </script>
+</body>

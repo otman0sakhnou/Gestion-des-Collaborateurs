@@ -154,6 +154,46 @@ namespace Gestion_des_Collaborateurs.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult page1()
+        {
+            List<CertificationViewModel> certifications = new List<CertificationViewModel>();
+
+            var collabcertifications = _context.AvoirCertifications.ToList();
+            var certificationIds = collabcertifications.Select(cf => cf.IdCertification).Distinct().ToList();
+
+            foreach (var certificatId in certificationIds)
+            {
+                var certificatName = _context.Certifications.FirstOrDefault(f => f.IdCertification == certificatId)?.NomCertification;
+                var collaboratorIds = collabcertifications.Where(cf => cf.IdCertification == certificatId).Select(cf => cf.IdCollaborateur);
+
+
+                var collaboratorNames = _context.Collaborateurs
+                    .Where(c => collaboratorIds.Contains(c.IdCollaborateur))
+                    .Select(c => c.Nom)
+                    .ToList();
+                var collaboratorPrenom = _context.Collaborateurs
+                    .Where(c => collaboratorIds.Contains(c.IdCollaborateur))
+                    .Select(c => c.Prenom)
+                    .ToList();
+                var datePassageList = collabcertifications
+        .Where(cf => cf.IdCertification == certificatId && cf.DatePassage != DateTime.MinValue)
+        .Select(cf => cf.DatePassage.Value)
+        .ToList();
+
+
+                certifications.Add(new CertificationViewModel
+                {
+                    NomCertificat = certificatName,
+                    NomCollaborateurs = collaboratorNames,
+                    PrenomCollaborateurs = collaboratorPrenom,
+                    DatePassage = datePassageList
+                    //DateObtentions = dateObtention,
+
+                });
+            }
+
+            return View(certifications);
+        }
 
         private bool CertificationExists(int id)
         {

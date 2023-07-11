@@ -154,7 +154,36 @@ namespace Gestion_des_Collaborateurs.Controllers
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
+        public IActionResult page1()
+        {
+            List<FormationViewModel> formations = new List<FormationViewModel>();
 
+            var collabFormations = _context.PasserFormations.ToList();
+            var formationIds = collabFormations.Select(cf => cf.IdFormation).Distinct().ToList();
+
+            foreach (var formationId in formationIds)
+            {
+                var formationName = _context.Formations.FirstOrDefault(f => f.IdFormation == formationId)?.NomFormation;
+                var collaboratorIds = collabFormations.Where(cf => cf.IdFormation == formationId).Select(cf => cf.IdCollaborateur);
+
+                var collaboratorNames = _context.Collaborateurs
+                    .Where(c => collaboratorIds.Contains(c.IdCollaborateur))
+                    .Select(c => c.Nom)
+                    .ToList();
+                var collaboratorPrenom = _context.Collaborateurs
+                    .Where(c => collaboratorIds.Contains(c.IdCollaborateur))
+                    .Select(c => c.Prenom)
+                    .ToList();
+                formations.Add(new FormationViewModel
+                {
+                    NomFormation = formationName,
+                    NomCollaborateurs = collaboratorNames,
+                    PrenomCollaborateurs = collaboratorPrenom
+                });
+            }
+
+            return View(formations);
+        }
         private bool FormationExists(int id)
         {
           return (_context.Formations?.Any(e => e.IdFormation == id)).GetValueOrDefault();

@@ -111,7 +111,7 @@ namespace Gestion_des_Collaborateurs.Controllers
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!AvoirCertificationExists(avoirCertification.IdCollaborateur))
+                    if (!AvoirCertificationExists((int)avoirCertification.IdCollaborateur))
                     {
                         return NotFound();
                     }

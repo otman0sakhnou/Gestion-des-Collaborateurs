@@ -3,6 +3,7 @@
     ViewData["Title"] = "Home Page";
 }
 
+@model List<TempsRestant>
 <!Doctype html>
 <html>
     <head>
@@ -20,7 +21,7 @@
                 <p class="font-weight-bold">Actualités</p>
             </div>
 
-            <div class="main-cards">
+            <div class="main-cards mb-3">
 
                 <div class="card">
                     <div class="card-inner">
@@ -52,66 +53,93 @@
                         <p class="textpr">PERIODE D'ESSEAI</p>
                         <span class="material-icons-outlined text-red">notification_important</span>
                     </div>
-                    <span class="textpr font-weight-bold">56</span>
+                    <span class="textpr font-weight-bold">@ViewBag.nombrePeriodeEssai</span>
                 </div>
 
             </div>
+            
 
-            <div class="container-info">
-                <div class="salaire">
-                    <div class="card-inner">
-                        <p class="textpr">Moyenne des salaires</p>
-                        <span class="material-icons-outlined savings">savings</span>
-                    </div>
-                    <span class="textpr font-weight-bold">*</span>
+            <div class=" row">
+                @*periode-essai*@
+
+                <div class="col-lg-9 col-sm-12">
+                    <h4>periode d'essai dont 2 Semaines</h4>
+                    <table class="table table-responsive" >
+                        <thead>
+                            <tr>
+                                <th>
+                                    Nom
+                                </th>
+                                <th>
+                                    Prénom
+                                </th>
+                                <th>
+                                    Date de Debut d'Essai
+                                </th>
+                                <th>
+                                    Date de Fin d'Essai
+                                </th>
+                                <th>Temps Restant</th>
+                              
+                                
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model)
+                            {
+                                <tr>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Nom)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.Prenom)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateDebutEssai)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem => item.DateFinEssai)
+                                    </td>
+                                    <td>
+                                        @Html.DisplayFor(modelItem =>item.tempsRe) Jours
+                                    </td>
+                               
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
                 </div>
-                <div class="age">
-                   <div class="card-inner">
-                        <p class="textpr">Moyenne d'age</p>
-                        <span class="material-icons-outlined people">people</span>
+
+
+                @*container-info*@
+                <div class="col-lg-3 col-sm-12 row">
+               <div class="col-12 mb-3">
+                        <div class="salaire">
+                            <div class="card-inner">
+                                <p class="textpr">Moyenne des salaires</p>
+                                <span class="material-icons-outlined savings">attach_money</span>
+                            </div>
+                            <span class="textpr font-weight-bold">$@ViewBag.MoyennSalaire </span>
+                        </div>
+               </div>
+                   <div class="col-12">
+                        <div class="age">
+                            <div class="card-inner">
+                                <p class="textpr">Moyenne d'age</p>
+                                <span class="material-icons-outlined people">people</span>
+                            </div>
+                            <span class="textpr font-weight-bold">@ViewBag.MoyenAge</span>
+                        </div>
                    </div>
-                    <span class="textpr font-weight-bold">*</span>
                 </div>
-            </div> 
-            <div class="periode-essai">
-                <h4>periode d'essai dont 2 Semaines</h4>
-                <table class="table table-lg">
-                    <tr class="table-active">
-                        <th>#</th>
-                        <th>Nom</th>
-                        <th>prenom</th>
-                        <th>date debut</th>
-                        <th>date fin</th>
-                        <th>temps restant</th>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>aaa</td>
-                        <td>aaa</td>
-                        <td>05/02/2023</td>
-                        <td>05/07/2023</td>
-                        <td>10jrs</td>
-                    </tr>
-                    <tr>
-                        <td>1</td>
-                        <td>aaa</td>
-                        <td>aaa</td>
-                        <td>05/02/2023</td>
-                        <td>05/07/2023</td>
-                        <td>10jrs</td>
-                    </tr>
-                    
 
 
-                </table>
             </div>
-            
-               
-            
-
 
         </main>
    </div>
+
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/apexcharts/3.35.3/apexcharts.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

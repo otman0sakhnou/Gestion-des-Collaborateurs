@@ -147,6 +147,10 @@ public partial class GestionCollaborateursContext : DbContext
             entity.Property(e => e.IdCollaborateur).HasColumnName("#id_collaborateur");
             entity.Property(e => e.IdFormation).HasColumnName("#id_formation");
             entity.Property(e => e.IdFormateur).HasColumnName("id_formateur");
+            entity.Property(e=>e.NomFormateur)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("NomFormateur");
 
             entity.HasOne(d => d.IdCollaborateurNavigation).WithMany(p => p.PasserFormations)
                 .HasForeignKey(d => d.IdCollaborateur)
