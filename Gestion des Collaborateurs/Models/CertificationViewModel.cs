@@ -10,6 +10,7 @@ namespace Gestion_des_Collaborateurs.Models
 
         [Display(Name = "Date d'obtention")]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}", ApplyFormatInEditMode = true)]
-        public List<DateTime> DatePassage { get; set; }
+        public List<DateTime>? DatePassage { get; set; }
+        public List<string>? DuréeObtention { get; set; }
     }
 }

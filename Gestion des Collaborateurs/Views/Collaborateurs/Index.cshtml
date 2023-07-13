@@ -114,7 +114,7 @@
 @{
     ViewData["Title"] = "Index";
 }
-@*
+
 @if (TempData["SuccessMessage"] != null)
 {
     <div class="toast align-items-center text-center toast-success" role="alert" aria-live="assertive" aria-atomic="true" data-delay="2000" data-autohide="true">
@@ -131,7 +131,7 @@
             @TempData["ErrorMessage"]
         </div>
     </div>
-}*@
+}
 <link href="~/template/bootstrap.css" rel="stylesheet" />
 <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
@@ -165,9 +165,6 @@
                         <tr>
                             <th></th>
                             <th>
-                                @Html.DisplayNameFor(model => model.IdCollaborateur)
-                            </th>
-                            <th>
                                 @Html.DisplayNameFor(model => model.Nom)
                             </th>
                             <th>
@@ -181,6 +178,9 @@
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.DateFinEssai)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model=>model.Anciennete)
                             </th>
                             <th>
                                 @Html.DisplayNameFor(model => model.DateEmbauche)
@@ -199,9 +199,6 @@
                                     <input type="checkbox" name="selectedCollaborateurs" value="@item.IdCollaborateur" />
                                 </td>
                                 <td>
-                                    @Html.DisplayFor(modelItem => item.IdCollaborateur)
-                                </td>
-                                <td>
                                     @Html.DisplayFor(modelItem => item.Nom)
                                 </td>
                                 <td>
@@ -216,6 +213,9 @@
                                 <td >
                                     @Html.DisplayFor(modelItem => item.DateFinEssai) 
                                    
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem=>item.Anciennete)
                                 </td>
                                 <td>
                                     @Html.DisplayFor(modelItem => item.DateEmbauche)
@@ -264,10 +264,16 @@
                             <!-- Populate options dynamically using JavaScript -->
                         </select>
                     </div>
+                    
+                    <div class="form-group">
+                        <lable for="NomFormateur">Nom de Formateur :</lable>
+                        <input type="text" class="form-control" name="formateurNom" id="NomFormateur" />
+
+                    </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="assignBtn">Assign</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="assignBtn">Affecter</button>
                 </div>
             </div>
         </div>
@@ -294,13 +300,17 @@
                         </select>
                     </div>
                     <div class="form-group">
-                        <label for="certificateDateObtention">Date of Obtaining:</label>
-                        <input type="date" class="form-control" id="certificateDateObtention">
+                        <label for="datePassageCertificat">Date de passaege:</label>
+                        <input type="date" class="form-control" id="datePassageCertificat">
+                    </div>
+                    <div class="form-group">
+                        <lable for="duréeObtention">Durée d'obtention :</lable>
+                        <input type="text" class="form-control" id="durée" name="duréeObtention" />
                     </div>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-primary" id="assignCertificateBtn">Assign</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <button type="button" class="btn btn-primary" id="assignCertificateBtn">Affecter</button>
                 </div>
             </div>
         </div>
@@ -346,18 +356,24 @@
                             // Handle assign button click in the formation modal
                             $("#assignBtn").click(function () {
                                 var formationName = $('#formationDropdown').val();
+                                var NomF = $('#NomFormateur').val();
                                 if (formationName !== "") {
                                     // Add a hidden input field to store the selected formation
                                     var hiddenInput = $('<input>')
                                         .attr('type', 'hidden')
                                         .attr('name', 'formationName')
                                         .val(formationName);
+                                    var formateurN = $('<input>')
+                                        .attr('type', 'hidden')
+                                        .attr('name', 'formateurNom')
+                                        .val(NomF)
                                     $('#assignFormationsCertificatesForm').append(hiddenInput);
+                                    $('#assignFormationsCertificatesForm').append(formateurN);
 
                                     // Submit the form
                                     $('#assignFormationsCertificatesForm').unbind('submit').submit();
                                 } else {
-                                    alert('Please select a formation.');
+                                    alert('choisissez une formation.');
                                 }
                             });
                         });
@@ -379,29 +395,35 @@
                             // Handle assign button click in the certificate modal
                             $("#assignCertificateBtn").click(function () {
                                 var certificateName = $('#certificateDropdown').val();
-                                var dateObtention = $('#certificateDateObtention').val();
+                                var datePassage = $('#datePassageCertificat').val();
+                                var dureeOb = $('#durée').val();
                                 if (certificateName !== "") {
                                     // Add a hidden input field to store the selected certificate
-                                    var hiddenInput = $('<input>')
+                                    var hiddenInput = $('<input>')//le nom du certification
                                         .attr('type', 'hidden')
                                         .attr('name', 'certificateName')
                                         .val(certificateName);
-                                    var dateInput = $('<input>')
+                                    var dtP = $('<input>')//date de passage
                                         .attr('type', 'hidden')
-                                        .attr('name', 'certificateDateObtention')
-                                        .val(dateObtention);
+                                        .attr('name', 'datePassageCertificat')
+                                        .val(datePassage);
+                                    var drO = $('<input>')//duree d'obtention
+                                        .attr('type', 'hidden')
+                                        .attr('name', 'duréeObtention')
+                                        .val(dureeOb)
                                     $('#assignFormationsCertificatesForm').append(hiddenInput);
-                                    $('#assignFormationsCertificatesForm').append(dateInput);
+                                    $('#assignFormationsCertificatesForm').append(dtP);
+                                    $('#assignFormationsCertificatesForm').append(drO);
                                     // Submit the form
                                     $('#assignFormationsCertificatesForm').unbind('submit').submit();
                                 } else {
-                                    alert('Please select a certificate.');
+                                    alert('Choisissez une certificat.');
                                 }
                             });
                         });
                     }
                 } else {
-                    alert("Please select at least one collaborateur.");
+                    alert("Choisissez au moins un collaborateur.");
                 }
             });
         });

@@ -155,12 +155,11 @@ namespace Gestion_des_Collaborateurs.Controllers
             {
                 _context.Collaborateurs.Remove(collaborateur);
             }
-            // Retrieve the associated records in collab_formation
             var collabFormations = _context.PasserFormations.Where(cf => cf.IdCollaborateur == id);
             var collabCertifications = _context.AvoirCertifications.Where(cc => cc.IdCollaborateur == id);
 
             // Remove the associated collab_formation records
-          /*  _context.Collaborateurs.RemoveRange(collabFormations);*/
+            _context.PasserFormations.RemoveRange(collabFormations);
 
             // Remove the associated collab_certification records
             _context.AvoirCertifications.RemoveRange(collabCertifications);
@@ -171,8 +170,8 @@ namespace Gestion_des_Collaborateurs.Controllers
             // Remove the collaborator
             _context.Collaborateurs.Remove(collaborateur);
 
-
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Collaborateur supprimer avec success";
             return RedirectToAction(nameof(Index));
         }
         [HttpPost]
@@ -192,7 +191,7 @@ namespace Gestion_des_Collaborateurs.Controllers
                 if (isFormationAssigned)
                 {
 /*                    TempData["ErrorMessage"] = "Formation is already assigned to one or more selected collaborators.";
-*/                    return RedirectToAction("/Home/Index");
+*/                    return RedirectToAction("/Index");
                 }
 
 
@@ -201,12 +200,13 @@ namespace Gestion_des_Collaborateurs.Controllers
                 var formation = _context.Formations.FirstOrDefault(f => f.NomFormation == formationName);
                 if (formation == null)
                 {
-                    return NotFound("Formation not found.");
+                    return NotFound("Formation introuvable.");
                 }
 
                 // Iterate over the selected collaborators and save the assignments
                 foreach (var collaborateurId in selectedCollaborateurs)
                 {
+                    var formateurNom = Request.Form["formateurNom"];
                     var collaborateur = _context.Collaborateurs.FirstOrDefault(c => c.IdCollaborateur == collaborateurId);
                     if (collaborateur != null)
                     {
@@ -214,7 +214,11 @@ namespace Gestion_des_Collaborateurs.Controllers
                         var collabFormation = new PasserFormation
                         {
                             IdCollaborateur = collaborateurId,
-                            IdFormation = formation.IdFormation
+                            IdFormation = formation.IdFormation,
+                            NomFormateur = formateurNom,
+
+
+
                         };
 
                         // Add the CollabFormation to the database
@@ -224,8 +228,8 @@ namespace Gestion_des_Collaborateurs.Controllers
 
                 // Save the changes to the database
                 _context.SaveChanges();
-/*                TempData["SuccessMessage"] = "Formation assigned successfully.";
-*/
+                TempData["SuccessMessage"] = "Formation affecter avec success.";
+
                 // Redirect to the Collaborateurs Index after assigning the formation
                 return RedirectToAction("Index");
             }
@@ -235,15 +239,15 @@ namespace Gestion_des_Collaborateurs.Controllers
                 bool isCertificateAssigned = _context.AvoirCertifications.Any(cc => selectedCollaborateurs.Contains(cc.IdCollaborateur.Value) && cc.IdCertificationNavigation.NomCertification == certificateName);
                 if (isCertificateAssigned)
                 {
-/*                    TempData["ErrorMessage"] = "Certificate is already assigned to one or more selected collaborators.";
-*/                    return RedirectToAction("Index");
+                  
+                   return RedirectToAction("Index");
                 }
 
                 // Retrieve the certificate from the database by name
                 var certificate = _context.Certifications.FirstOrDefault(c => c.NomCertification == certificateName);
                 if (certificate == null)
                 {
-                    return NotFound("Certificate not found.");
+                    return NotFound("Certification introuvable.");
                 }
 
                 // Iterate over the selected collaborators and save the assignments
@@ -252,8 +256,9 @@ namespace Gestion_des_Collaborateurs.Controllers
                     var collaborateur = _context.Collaborateurs.FirstOrDefault(c => c.IdCollaborateur == collaborateurId);
                     if (collaborateur != null)
                     {
-                        string certificateDateObtentionString = Request.Form["certificateDateObtention"];
-                        if (!DateTime.TryParseExact(certificateDateObtentionString, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime certificateDateObtention))
+                        var duréeObtention = Request.Form["duréeObtention"];
+                        string datePassageCertificatString = Request.Form["datePassageCertificat"];
+                        if (!DateTime.TryParseExact(datePassageCertificatString, "yyyy-MM-dd", CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime datePassageCertificat))
                         {
                             return BadRequest("Invalid date format for certificateDateObtention. Please enter the date in the format 'yyyy-MM-dd'.");
                         }
@@ -262,7 +267,8 @@ namespace Gestion_des_Collaborateurs.Controllers
                         {
                             IdCollaborateur = collaborateurId,
                             IdCertification = certificate.IdCertification,
-                            DatePassage = certificateDateObtention,
+                            DatePassage = datePassageCertificat,
+                            DuréeObtention = duréeObtention,
                         };
 
                         // Add the CollabCertificate to the database
@@ -272,7 +278,7 @@ namespace Gestion_des_Collaborateurs.Controllers
 
                 // Save the changes to the database
                 _context.SaveChanges();
-                TempData["SuccessMessage"] = "certificat assigned successfully.";
+                TempData["SuccessMessage"] = "certification affecter avec success.";
 
 
                 // Redirect to the Collaborateurs Index after assigning the certificate

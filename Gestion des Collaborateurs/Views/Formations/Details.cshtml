@@ -3,34 +3,50 @@
 @{
     ViewData["Title"] = "Details";
 }
+    <link href="~/template/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-<h1>Details</h1>
 
-<div>
-    <h4>Formation</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.NomFormation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.NomFormation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateDebutFormation)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateDebutFormation)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateFinFormation)
-        </dt>
-        <dd class = "col-sm-10">
+
+
+    <h1 style="color:#485785">Details</h1>
+
+    <div>
+    <h4 style="color:#485785">Formation</h4>
+
+
+        <hr />
+        
+        <dl class="row">
+            <dt class = "col-sm-2">
+                Nom de la formation
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.NomFormation)
+             </dd>
+            <dt class = "col-sm-2">
+                Date de début 
+            </dt>
+            <dd class = "col-sm-10">
+                @Html.DisplayFor(model => model.DateDebutFormation)
+            </dd>
+            <dt class = "col-sm-2">
+                Date de fin de 
+            </dt>
+            <dd class = "col-sm-10">
             @Html.DisplayFor(model => model.DateFinFormation)
-        </dd>
-    </dl>
-</div>
-<div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdFormation">Edit</a> |
-    <a asp-action="Index">Back to List</a>
-</div>
+            </dd>
+        </dl>
+    </div>
+    <div>
+        <form asp-action="Edit">
+            <input type="hidden" asp-for="IdFormation" />
+            <input style="margin-right:10px;" type="submit" value="Modifier" class="btn btn-success" />
+
+            <a class="style-back-liste" asp-controller="Formations" asp-action="Index">
+                <span class="material-icons-outlined">
+                    arrow_back_ios_new
+                </span>Revenir à la Liste
+            </a>
+        </form>
+    </div>

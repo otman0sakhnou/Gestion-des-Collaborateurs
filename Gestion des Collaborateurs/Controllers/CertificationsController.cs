@@ -146,11 +146,15 @@ namespace Gestion_des_Collaborateurs.Controllers
                 return Problem("Entity set 'GestionCollaborateursContext.Certifications'  is null.");
             }
             var certification = await _context.Certifications.FindAsync(id);
-            if (certification != null)
+            if (certification == null)
             {
-                _context.Certifications.Remove(certification);
+                return NotFound();
             }
-            
+            var certifCollab = _context.AvoirCertifications.Where(c => c.IdCertification == id);
+            _context.AvoirCertifications.RemoveRange(certifCollab);
+            _context.Certifications.Remove(certification);
+            TempData["SuccessMessage"] = "Certification supprimer avec success";
+
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }

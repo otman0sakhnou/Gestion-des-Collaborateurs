@@ -3,45 +3,69 @@
 @{
     ViewData["Title"] = "Index";
 }
+<link href="~/template/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
-<h1>Index</h1>
 
-<p>
-    <a asp-action="Create">Create New</a>
-</p>
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.NomFormation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateDebutFormation)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DateFinFormation)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.NomFormation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateDebutFormation)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateFinFormation)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.IdFormation">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.IdFormation">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.IdFormation">Delete</a>
-            </td>
-        </tr>
-}
-    </tbody>
-</table>
+<body>
+    <div class="row">
+        <div class="d-sm-flex align-items justify-content-between mb-4">
+            <h1 class="h3 mb-0 text-gray-800">Formations</h1>
+        </div>
+        <div class="card">
+            <br />
+            <div class="d-grid gap-2 d-inline-flex p-2 justify-content-md-end">
+                <div class="col-7 text-end">
+                    <a asp-controller="Formations" asp-action="Create" class="btn btn-primary custom-margin">
+                        <i class="bi bi-plus-circle"></i>&nbsp;Ajouter Formations
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="card-body">
+
+                <table id="example" class="table table-striped" style="width:100%">
+                    <thead>
+                        <tr>
+                            <th>
+                                @Html.DisplayNameFor(model => model.NomFormation)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateDebutFormation)
+                            </th>
+                            <th>
+                                @Html.DisplayNameFor(model => model.DateFinFormation)
+                            </th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.NomFormation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateDebutFormation)
+                                </td>
+                                <td>
+                                    @Html.DisplayFor(modelItem => item.DateFinFormation)
+                                </td>
+                                <td>
+                                    <a asp-action="Edit" asp-route-id="@item.IdFormation"><span class="material-icons-outlined text-primary">edit </span></a> |
+                                    <a asp-action="Details" asp-route-id="@item.IdFormation"><span class="material-icons-outlined text-success">search </span></a> |
+                                    <a asp-action="Delete" asp-route-id="@item.IdFormation"><span class="material-icons-outlined text-danger">delete </span></a>
+                                </td>
+
+
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+
+            </div>
+        </div>
+    </div>
+    </body>

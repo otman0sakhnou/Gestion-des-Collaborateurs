@@ -49,64 +49,111 @@
     ViewData["Title"] = "Edit";
 }
 
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>nouveau Collaborateur</title>
-<link href="~/template/bootstrap.css" rel="stylesheet" />
-<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nouveau Collaborateur</title>
+    <link href="~/template/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <style>
+        .label-container {
+            display: flex;
+            align-items: center;
+        }
 
-<h1 style="color:black;">Modifier</h1>
-<h4>Formation</h4>
-<hr />
-<div class="row">
-    <div class="col-md-4">
-        <form asp-action="Edit">
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <input type="hidden" asp-for="IdFormation" />
-            <div class="form-group">
-                <table>
-                    <tr>
-                        <td><label asp-for="NomFormation" class="control-label">Nom de la formation</label></td>
+            .label-container label {
+                white-space: nowrap;
+            }
+    </style>
+</head>
+<body>
 
-                        <td><label asp-for="DateDebutFormation" class="control-label">Date de début de la formation</label></td>
-                    </tr>
-                    <tr>
-                        <td>
-                            <input asp-for="NomFormation" class="form-control" />
-                            <span asp-validation-for="NomFormation" class="text-danger"></span>
-                        </td>
+    <h1 style="color:#485785;">Modifier</h1>
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Create">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="IdFormation" class="control-label">L'id de la formation</label>
+                                </div>
+                            </td>
+                            <td style="padding-right: 70px;"></td>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="NomFormation" class="control-label">Nom de la formation</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width:243px;" asp-for="IdFormation" class="form-control" />
+                                <span asp-validation-for="IdFormation" class="text-danger"></span>
+                            </td>
+                            <td style="padding-right: 70px;"></td>
+                            <td>
+                                <input style="width:243px;" asp-for="NomFormation" class="form-control" />
+                                <span asp-validation-for="NomFormation" class="text-danger"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br />
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="DateDebutFormation" class="control-label">Date de début de la formation</label>
+                                </div>
+                            </td>
+                            <td style="padding-right: 70px;"></td>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="DateFinFormation" class="control-label">Date de fin de la formation</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input style="width:243px;" asp-for="DateDebutFormation" type="date" class="form-control" />
+                                <span asp-validation-for="DateDebutFormation" class="text-danger"></span>
+                            </td>
+                            <td style="padding-right: 70px;"></td>
+                            <td>
+                                <input style="width:243px;" asp-for="DateFinFormation" type="date" class="form-control" />
+                                <span asp-validation-for="DateFinFormation" class="text-danger"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br />
+                <div class="form-group">
 
-                        <td>
-                            <input type="date" asp-for="DateDebutFormation" class="form-control" />
-                            <span asp-validation-for="DateDebutFormation" class="text-danger"></span>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <br />
-            <div class="form-group">
-                <label asp-for="DateFinFormation" class="control-label">Date de fin de la formation</label>
-                <input type="date" asp-for="DateFinFormation" class="form-control" />
-                <span asp-validation-for="DateFinFormation" class="text-danger"></span>
-            </div>
-            <br />
-            <div class="form-group">
-                <input type="submit" value="Garder" class="btn btn-success" />
-            </div>
-        </form>
+                    <form asp-action="Edit">
+                        <input type="hidden" asp-for="IdFormation" />
+                        <input style="margin-right:10px;" type="submit" value="Enregistrer" class="btn btn-primary" />
+                        <a class="style-back-liste" asp-controller="Formations" asp-action="Index">
+                            <span class="material-icons-outlined">
+                                arrow_back_ios_new
+                            </span>Revenir à la Liste
+                        </a>
+                    </form>
+                </div>
+            </form>
+        </div>
     </div>
-</div>
-<br />
 
-<div>
-    <a asp-controller="Home" asp-action="Index">
-        <i class="bi bi-box-arrow-left"></i>
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-box-arrow-left" viewBox="0 0 16 16">
-            <path fill-rule="evenodd" d="M6 12.5a.5.5 0 0 0 .5.5h8a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5h-8a.5.5 0 0 0-.5.5v2a.5.5 0 0 1-1 0v-2A1.5 1.5 0 0 1 6.5 2h8A1.5 1.5 0 0 1 16 3.5v9a1.5 1.5 0 0 1-1.5 1.5h-8A1.5 1.5 0 0 1 5 12.5v-2a.5.5 0 0 1 1 0v2z" />
-            <path fill-rule="evenodd" d="M.146 8.354a.5.5 0 0 1 0-.708l3-3a.5.5 0 1 1 .708.708L1.707 7.5H10.5a.5.5 0 0 1 0 1H1.707l2.147 2.146a.5.5 0 0 1-.708.708l-3-3z" />
-        </svg>Revenir à l'aceuil
-    </a>
-</div>
+
+
+</body>
+</html>
 
 @section Scripts {
     @{

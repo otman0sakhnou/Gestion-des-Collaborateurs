@@ -3,6 +3,190 @@
 @{
     ViewData["Title"] = "Edit";
 }
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>nouveau Collaborateur</title>
+    <link href="~/template/bootstrap.css" rel="stylesheet" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+<body>
+
+ <div class="row">
+        <h1 style="color:#485785;"> Modifier</h1>
+
+
+    <hr />
+    <div class="row">
+        <div class="col-md-4">
+            <form asp-action="Edit">
+                <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+                <input type="hidden" asp-for="IdCollaborateur" />
+
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="Nom" class="control-label">Nom</label>
+                                </div>
+                            </td>
+                            <td style="padding-right:70px;"></td>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="Prenom" class="control-label">Prénom</label>
+                                </div>
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td>
+                                <input style="width:188px;" asp-for="Nom" class="form-control" />
+                                <span asp-validation-for="Nom" class="text-danger"></span>
+                            </td>
+                            <td style="padding-right:70px;"></td>
+                            <td>
+                                <input style="width:188px;" asp-for="Prenom" class="form-control" />
+                                <span asp-validation-for="Prenom" class="text-danger"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <br />
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="DateEmbauche" class="control-label">Date d'embauche</label>
+                                </div>
+                            </td>
+                            <td style="padding-right:70px;"></td>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="Anciennete" class="control-label">Ancienneté</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input asp-for="DateEmbauche" type="date" class="form-control" />
+                                <span asp-validation-for="DateEmbauche" class="text-danger"></span>
+                            </td>
+                            <td style="padding-right:70px;"></td>
+
+                            <td>
+                                <input style="width:188px;" asp-for="Anciennete" class="form-control" />
+                                <span asp-validation-for="Anciennete" class="text-danger"></span>
+                            </td>
+                            <td style="padding-right:110px;"></td>
+
+                        </tr>
+                    </table>
+                </div>
+                <br />
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="DateDebutEssai" class="control-label">Date de début d'essai</label>
+                                </div>
+                            </td>
+                            <td style="padding-right:70px;"></td>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="DateFinEssai" class="control-label">Date de fin d'essai</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="date" asp-for="DateFinEssai" class="form-control" />
+                                <span asp-validation-for="DateFinEssai" class="text-danger"></span>
+                            </td>
+                            <td style="padding-right:70px;"></td>
+                            <td>
+                                <input type="date" asp-for="DateDebutEssai" class="form-control" />
+                                <span asp-validation-for="DateDebutEssai" class="text-danger"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+                <br />
+                <div class="form-group">
+                    <table>
+                        <tr>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="DateNaissance" class="control-label">Date de naissance</label>
+                                </div>
+                            </td>
+                            <td style="padding-right:70px;"></td>
+                            <td>
+                                <div class="label-container">
+                                    <label asp-for="salaire" class="control-label">Salaire</label>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <input type="date" asp-for="DateNaissance" class="form-control" />
+                                <span asp-validation-for="DateNaissance" class="text-danger"></span>
+                            </td>
+                            <td style="padding-right:70px;"></td>
+                            <td>
+                                <input style="width:188px;" asp-for="salaire" class="form-control" />
+                                <span asp-validation-for="DateFinEssai" class="text-danger"></span>
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+
+                <br />
+                <div class="form-group">
+                    <input style="margin-right:10px;" type="submit" value="Enregistrer" class="btn btn-primary" />
+                    <a class="style-back-liste" asp-controller="Collaborateurs" asp-action="Index">
+                        <span class="material-icons-outlined">
+                            arrow_back_ios_new
+                        </span>Revenir à la liste
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+ </div>
+</body>
+</html>
+
+
+@section Scripts {
+    @{
+        await Html.RenderPartialAsync("_ValidationScriptsPartial");
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@*@model Gestion_des_Collaborateurs.Models.Collaborateur
+
+@{
+    ViewData["Title"] = "Edit";
+}
 
 <h1 style="color:black;">Modiier</h1>
 
@@ -113,4 +297,4 @@
     @{
         await Html.RenderPartialAsync("_ValidationScriptsPartial");
     }
-}
+}*@

@@ -27,9 +27,9 @@ namespace Gestion_des_Collaborateurs.Controllers
         }
 
         // GET: AvoirCertifications/Details/5
-        public async Task<IActionResult> Details(int? id)
+        public async Task<IActionResult> Details(int? key1,int? key2)
         {
-            if (id == null || _context.AvoirCertifications == null)
+            if (key1 == null || key2==null || _context.AvoirCertifications == null)
             {
                 return NotFound();
             }
@@ -37,7 +37,7 @@ namespace Gestion_des_Collaborateurs.Controllers
             var avoirCertification = await _context.AvoirCertifications
                 .Include(a => a.IdCertificationNavigation)
                 .Include(a => a.IdCollaborateurNavigation)
-                .FirstOrDefaultAsync(m => m.IdCollaborateur == id);
+                .FirstOrDefaultAsync(m => (m.IdCertification == key2 && m.IdCollaborateur==key1) );
             if (avoirCertification == null)
             {
                 return NotFound();

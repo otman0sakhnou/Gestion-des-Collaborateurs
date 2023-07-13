@@ -10,6 +10,8 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"]- Gestion des Collaborateurs</title>
+    <link href="~/template/bootstrap.css" rel="stylesheet" />
+
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons+Outlined" rel="stylesheet">
 </head>
@@ -38,6 +40,7 @@
                     </div>
                     <span class="textpr"></span>
                     <span class="textpr font-weight-bold">@ViewBag.nombreFormation</span>
+                    <span style="font-weight:300;">(@ViewBag.completer completer) </span>
                 </div>
 
                 <div class="card">
@@ -64,7 +67,7 @@
 
                 <div class="col-lg-9 col-sm-12">
                     <h4>periode d'essai dont 2 Semaines</h4>
-                    <table class="table table-responsive" >
+                    <table class="table table-striped" >
                         <thead>
                             <tr>
                                 <th>

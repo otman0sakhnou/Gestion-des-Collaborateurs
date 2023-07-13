@@ -9,7 +9,6 @@ public partial class Certification
 {
     [Required(ErrorMessage ="saisie d'Id est obligatoire")]
     [Key]
-    [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
     public int IdCertification { get; set; }
     [MaxLength(50, ErrorMessage = "le champs de doit pas passer 50 caractères")]
 
@@ -17,7 +16,6 @@ public partial class Certification
     public string? NomCertification { get; set; }
     [Required(ErrorMessage = "la saisie du durée du certification est obligatoire")]
     public string? Durée { get; set; }
-
 
     [Required(ErrorMessage = "la saisie du Coût du certif est obligatoire")]
     public decimal? Coût { get; set; }

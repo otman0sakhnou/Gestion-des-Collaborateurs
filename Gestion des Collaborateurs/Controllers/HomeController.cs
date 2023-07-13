@@ -55,9 +55,10 @@ namespace Gestion_des_Collaborateurs.Controllers
         {
             ViewBag.nombreColl = await _context.Collaborateurs.CountAsync();
             ViewBag.nombreFormation= await _context.Formations.CountAsync();
-            ViewBag.nombreCertif= await _context.Certifications.CountAsync();
+            ViewBag.nombreCertif= await _context.AvoirCertifications.CountAsync();
             var DateAjourd = DateTime.Now.Date;
             ViewBag.nombrePeriodeEssai = await _context.Collaborateurs.Where(c => c.DateFinEssai > DateAjourd).CountAsync();
+            ViewBag.completer = await _context.PasserFormations.Where(c => c.IdFormationNavigation.DateFinFormation < DateAjourd).CountAsync();
 
             ViewBag.MoyennSalaire = await _context.Collaborateurs.Select(c => c.salaire).AverageAsync();
             var coll = _context.Collaborateurs.ToList();

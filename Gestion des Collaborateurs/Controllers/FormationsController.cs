@@ -146,13 +146,25 @@ namespace Gestion_des_Collaborateurs.Controllers
                 return Problem("Entity set 'GestionCollaborateursContext.Formations'  is null.");
             }
             var formation = await _context.Formations.FindAsync(id);
-            if (formation != null)
+            if (formation == null)
             {
-                _context.Formations.Remove(formation);
+                return NotFound();
             }
-            
+            var formationColl = _context.PasserFormations.Where(cf => cf.IdFormation == id);
+
+            // Remove the affected formations records
+            _context.PasserFormations.RemoveRange(formationColl);
+
+        
+
+
+            // Remove the collaborator
+            _context.Formations.Remove(formation);
+
             await _context.SaveChangesAsync();
+            TempData["SuccessMessage"] = "Formation supprimer avec success";
             return RedirectToAction(nameof(Index));
+   
         }
         public IActionResult page1()
         {

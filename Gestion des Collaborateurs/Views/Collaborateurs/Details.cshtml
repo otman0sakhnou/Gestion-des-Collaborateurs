@@ -1,72 +1,80 @@
-﻿@model Gestion_des_Collaborateurs.Models.Collaborateur
+﻿
+
+
+
+
+
+
+@model Gestion_des_Collaborateurs.Models.Collaborateur
 
 @{
     ViewData["Title"] = "Details";
 }
+<link href="~/template/bootstrap.css" rel="stylesheet" />
+<link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
 
 <h1>Details</h1>
 
 <div>
     <h4>Collaborateur</h4>
     <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
+    <dl style="border:solid black 2px;" class="row">
+        <dt style="border:solid black 2px;" class="col-sm-2">
             @Html.DisplayNameFor(model => model.Nom)
         </dt>
-        <dd class = "col-sm-10">
+        <dd  class="col-sm-10">
             @Html.DisplayFor(model => model.Nom)
         </dd>
-        <dt class = "col-sm-2">
+        <dt style="border:solid black 2px;" class="col-sm-2">
             @Html.DisplayNameFor(model => model.Prenom)
         </dt>
-        <dd class = "col-sm-10">
+        <dd  class="col-sm-10">
             @Html.DisplayFor(model => model.Prenom)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model=>model.DateNaissance)
+        <dt style="border:solid black 2px;" class="col-sm-2">
+            Date de Naissance
         </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model=>model.DateNaissance)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateEmbauche)
+        <dt style="border:solid black 2px;" class="col-sm-2">
+           Date d'embauche
         </dt>
-        <dd class = "col-sm-10">
+        <dd  class="col-sm-10">
             @Html.DisplayFor(model => model.DateEmbauche)
         </dd>
-        <dt class = "col-sm-2">
+        <dt style="border:solid black 2px;" class="col-sm-2">
             @Html.DisplayNameFor(model => model.Anciennete)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Anciennete)
         </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateDebutEssai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateDebutEssai)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DateFinEssai)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DateFinEssai)
-        </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model=>model.DateNaissance)
+        <dt style="border:solid black 2px;" class="col-sm-2">
+            Date Debut d'Essai
         </dt>
         <dd class="col-sm-10">
-            @Html.DisplayFor(model=>model.DateNaissance)
+            @Html.DisplayFor(model => model.DateDebutEssai)
         </dd>
+        <dt style="border:solid black 2px;" class="col-sm-2">
+            Date Fin d'Essai
+        </dt>
+        <dd  class="col-sm-10">
+            @Html.DisplayFor(model => model.DateFinEssai)
+        </dd>
+      
+        <dt style="border:solid black 2px;" class="col-sm-2">
+            @Html.DisplayNameFor(model => model.salaire)
+        </dt>
         <dd class="col-sm-10">
             @Html.DisplayFor(model => model.salaire)
         </dd>
-        <dt class="col-sm-2">
-            @Html.DisplayNameFor(model => model.salaire)
-        </dt>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model?.IdCollaborateur">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a  class="btn btn-primary" asp-action="Edit" asp-route-id="@Model?.IdCollaborateur">Modifier</a> 
+    <a class="style-back-liste" asp-controller="Collaborateurs" asp-action="Index">
+        <span class="material-icons-outlined">
+            arrow_back_ios_new
+        </span>Revenir à la Liste
+    </a>
 </div>
